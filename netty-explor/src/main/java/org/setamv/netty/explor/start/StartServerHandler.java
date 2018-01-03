@@ -1,14 +1,19 @@
-package org.setamv.netty.explor.start.discard;
+package org.setamv.netty.explor.start;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.CharsetUtil;
+import io.netty.util.ReferenceCountUtil;
 
-public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
+public class StartServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // discard the received message
-        ((ByteBuf)msg).release();
+        ByteBuf buf = (ByteBuf)msg;
+        String message = buf.toString(CharsetUtil.UTF_8);
+        System.out.print(message);
+        ctx.write(buf);
+        ctx.flush();
     }
 
     @Override
