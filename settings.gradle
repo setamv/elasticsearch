@@ -178,4 +178,6 @@ if (extraProjects.exists()) {
   }
 }
 include 'libs'
+include 'netty-explorer'
+include 'netty-explor'
 
